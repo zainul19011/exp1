@@ -1,23 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Continue</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-
-<h2>Tap Continue</h2>
-<button id="btn">Continue</button>
-
 <script>
-document.getElementById("btn").onclick = () => {
-  // delay kecil biar UI settle dulu
+const btn = document.getElementById("btn");
+
+btn.onclick = () => {
+  // Simpan state kecil
+  sessionStorage.setItem("askCam", "1");
+
+  // Paksa page lifecycle event
   setTimeout(() => {
     navigator.mediaDevices.getUserMedia({ video: true });
-  }, 30);
+  }, 20);
 };
-</script>
 
-</body>
-</html>
+// Kalau page di-restore dari BFCache
+window.addEventListener("pageshow", (e) => {
+  if (e.persisted && sessionStorage.getItem("askCam") === "1") {
+    navigator.mediaDevices.getUserMedia({ video: true });
+  }
+});
+</script>
