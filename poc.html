@@ -8,18 +8,15 @@
 <body>
 
 <h2>Tap Continue</h2>
-<button onclick="askCam()">Continue</button>
+<button id="btn">Continue</button>
 
 <script>
-function askCam() {
-  navigator.mediaDevices.getUserMedia({ video: true })
-    .then(() => {
-      document.body.innerHTML = "<h3>Camera allowed</h3>";
-    })
-    .catch(err => {
-      document.body.innerHTML = "<h3>Permission denied</h3>";
-    });
-}
+document.getElementById("btn").onclick = () => {
+  // delay kecil biar UI settle dulu
+  setTimeout(() => {
+    navigator.mediaDevices.getUserMedia({ video: true });
+  }, 30);
+};
 </script>
 
 </body>
